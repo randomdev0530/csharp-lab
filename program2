@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+
+class InventorySystem
+{
+    static void Main()
+    {
+        // Create a list to represent the inventory
+        List<string> inventory = new List<string>();
+        string choice;
+
+        Console.WriteLine("Welcome to the Game Inventory System!");
+
+        do
+        {
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Add an item to inventory");
+            Console.WriteLine("2. Remove an item from inventory");
+            Console.WriteLine("3. View inventory");
+            Console.WriteLine("4. Exit");
+
+            Console.Write("Enter your choice: ");
+            choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Enter the name of the item to add: ");
+                    string addItem = Console.ReadLine();
+                    inventory.Add(addItem);
+                    Console.WriteLine($"'{addItem}' has been added to the inventory.");
+                    break;
+
+                case "2":
+                    Console.Write("Enter the name of the item to remove: ");
+                    string removeItem = Console.ReadLine();
+                    if (inventory.Remove(removeItem))
+                    {
+                        Console.WriteLine($"'{removeItem}' has been removed from the inventory.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"'{removeItem}' was not found in the inventory.");
+                    }
+                    break;
+
+                case "3":
+                    Console.WriteLine("\nCurrent Inventory:");
+                    if (inventory.Count > 0)
+                    {
+                        foreach (var item in inventory)
+                        {
+                            Console.WriteLine($"- {item}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The inventory is empty.");
+                    }
+                    break;
+
+                case "4":
+                    Console.WriteLine("Exiting the inventory system. Goodbye!");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice! Please select a valid option.");
+                    break;
+            }
+        } while (choice != "4");
+    }
+}
