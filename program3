@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Create a dictionary to store key-value pairs
+        Dictionary<int, string> data = new Dictionary<int, string>();
+
+        Console.WriteLine("Dictionary Example: Store and Retrieve Key-Value Pairs");
+
+        // Add key-value pairs to the dictionary
+        data.Add(1, "Apple");
+        data.Add(2, "Banana");
+        data.Add(3, "Cherry");
+
+        // Display all key-value pairs
+        Console.WriteLine("\nCurrent dictionary contents:");
+        foreach (var pair in data)
+        {
+            Console.WriteLine($"Key: {pair.Key}, Value: {pair.Value}");
+        }
+
+        // Retrieve a value by key
+        Console.Write("\nEnter a key to retrieve its value: ");
+        int key = Convert.ToInt32(Console.ReadLine());
+
+        if (data.TryGetValue(key, out string value))
+        {
+            Console.WriteLine($"The value for key {key} is '{value}'.");
+        }
+        else
+        {
+            Console.WriteLine($"Key {key} was not found in the dictionary.");
+        }
+
+        // Modify a value
+        Console.Write("\nEnter a key to modify its value: ");
+        int modifyKey = Convert.ToInt32(Console.ReadLine());
+        if (data.ContainsKey(modifyKey))
+        {
+            Console.Write("Enter the new value: ");
+            string newValue = Console.ReadLine();
+            data[modifyKey] = newValue;
+            Console.WriteLine($"Key {modifyKey} has been updated to value '{newValue}'.");
+        }
+        else
+        {
+            Console.WriteLine($"Key {modifyKey} was not found in the dictionary.");
+        }
+
+        // Display updated dictionary
+        Console.WriteLine("\nUpdated dictionary contents:");
+        foreach (var pair in data)
+        {
+            Console.WriteLine($"Key: {pair.Key}, Value: {pair.Value}");
+        }
+    }
+}
