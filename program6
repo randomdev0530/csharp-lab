@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    Rigidbody2D rb;
+    public float speed = 10.0f;
+    public float jumpHeight = 20f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(x * speed * Time.deltaTime, rb.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        }
+    }
+}
