@@ -1,0 +1,79 @@
+First setup terminal using: dotnet new winforms -n forms
+using System;
+using System.Windows.Forms;
+
+namespace LabelTextBoxButtonDemo
+{
+    public class MainForm : Form
+    {
+        private Label nameLabel;
+        private TextBox nameTextBox;
+        private Button displayButton;
+        private Label outputLabel;
+
+        public MainForm()
+        {
+            // Initialize form properties
+            this.Text = "Label, TextBox, and Button Demo";
+            this.Size = new System.Drawing.Size(400, 200);
+
+            // Initialize and configure Label
+            nameLabel = new Label
+            {
+                Text = "Enter your name:",
+                Location = new System.Drawing.Point(20, 20),
+                AutoSize = true
+            };
+
+            // Initialize and configure TextBox
+            nameTextBox = new TextBox
+            {
+                Location = new System.Drawing.Point(150, 18),
+                Width = 200
+            };
+
+            // Initialize and configure Button
+            displayButton = new Button
+            {
+                Text = "Display",
+                Location = new System.Drawing.Point(150, 60),
+                AutoSize = true
+            };
+            displayButton.Click += DisplayButton_Click;
+
+            // Initialize and configure Output Label
+            outputLabel = new Label
+            {
+                Location = new System.Drawing.Point(20, 100),
+                AutoSize = true,
+                ForeColor = System.Drawing.Color.Blue
+            };
+
+            // Add controls to the form
+            this.Controls.Add(nameLabel);
+            this.Controls.Add(nameTextBox);
+            this.Controls.Add(displayButton);
+            this.Controls.Add(outputLabel);
+        }
+
+        private void DisplayButton_Click(object sender, EventArgs e)
+        {
+            string name = nameTextBox.Text;
+            if (!string.IsNullOrEmpty(name))
+            {
+                outputLabel.Text = $"Hello, {name}!";
+            }
+            else
+            {
+                outputLabel.Text = "Please enter your name.";
+            }
+        }
+
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.Run(new MainForm());
+        }
+    }
+}
