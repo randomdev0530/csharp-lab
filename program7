@@ -1,0 +1,27 @@
+GameManager:
+using UnityEngine;
+
+public class Gamemanager : MonoBehaviour
+{
+    int score = 0;
+
+    public void AddCoin(int value)
+    {
+        Debug.Log(score += value);
+    }
+}
+Coin:
+using UnityEngine;
+
+public class coin : MonoBehaviour
+{
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            FindObjectOfType<Gamemanager>().AddCoin(10);
+            Destroy(gameObject);
+        }
+    }
+}
+
