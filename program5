@@ -1,4 +1,6 @@
 First setup terminal using: dotnet new winforms -n forms
+cd forms
+dotnet run
 using System;
 using System.Windows.Forms;
 
