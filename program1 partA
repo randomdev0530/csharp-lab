@@ -1,3 +1,7 @@
+open terminal and run
+dotnet new console -n "myfirstapp"
+then type dotnet run for executing the file
+
 using System;
 
 class Program
