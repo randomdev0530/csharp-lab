@@ -1,23 +1,11 @@
 using UnityEngine;
-using System.IO;
 
-public class GameManager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
     int score = 0;
-    int old_score = 0;
-    string filePath;
-
-    [System.Serializable]
-    class SaveData
-    {
-        public int score;
-    }
-
-    SaveData data = new SaveData();
 
     void Start()
     {
-        filePath = Path.Combine(Application.dataPath, "MyJsonFile.json");
         LoadData();
     }
 
@@ -25,27 +13,19 @@ public class GameManager : MonoBehaviour
     {
         score += value;
         Debug.Log($"New score: {score}");
-        SaveGameData();
+        SaveData();
     }
 
-    void SaveGameData()
+    void SaveData()
     {
-        data.score = score;
-        File.WriteAllText(filePath, JsonUtility.ToJson(data));
-        Debug.Log($"Data saved: {data.score}");
+        PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.Save();
+        Debug.Log("Game data saved.");
     }
 
     void LoadData()
     {
-        if (File.Exists(filePath))
-        {
-            data = JsonUtility.FromJson<SaveData>(File.ReadAllText(filePath));
-            old_score = data.score;
-            Debug.Log($"Old score: {old_score}");
-        }
-        else
-        {
-            Debug.Log("No save file found.");
-        }
+        score = PlayerPrefs.GetInt("Score", 0);
+        Debug.Log($"Loaded score: {score}");
     }
 }
